@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
@@ -17,7 +16,7 @@ const Header = () => {
 
   return (
     <>
-      <Header className="navbar fixed z-10 bg-opacity-30 bg-black text-white">
+      <header className="navbar fixed z-10 bg-opacity-30 bg-black text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -37,7 +36,7 @@ const Header = () => {
         <div className="navbar-end">
           <a className="btn">Get started</a>
         </div>
-      </Header>
+      </header>
     </>
   );
 };
