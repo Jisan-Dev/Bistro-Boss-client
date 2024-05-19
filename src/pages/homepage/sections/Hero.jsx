@@ -11,23 +11,23 @@ import img6 from '../../../assets/home/06.png';
 const Hero = () => {
   return (
     <div>
-      <Carousel autoPlay={true} infiniteLoop={true}>
-        <div>
+      <Carousel autoPlay={true} infiniteLoop={true} className="h-auto">
+        <div className="h-screen">
           <img src={img1} />
         </div>
-        <div>
+        <div className="h-screen">
           <img src={img2} />
         </div>
-        <div>
+        <div className="h-screen">
           <img src={img3} />
         </div>
-        <div>
+        <div className="h-screen">
           <img src={img4} />
         </div>
-        <div>
+        <div className="h-screen">
           <img src={img5} />
         </div>
-        <div>
+        <div className="h-screen">
           <img src={img6} />
         </div>
       </Carousel>
