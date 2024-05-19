@@ -16,7 +16,7 @@ import slide5 from '../../../../assets/home/slide5.jpg';
 
 const Categories = () => {
   return (
-    <section className="container mx-auto  max-w-[1160px] my-28">
+    <section className="container mx-auto  max-w-[1160px] my-20">
       <SectionHeader subHeading={'From 11.00am to 10.00pm'} heading={'Order Online'} />
       <main>
         <Swiper

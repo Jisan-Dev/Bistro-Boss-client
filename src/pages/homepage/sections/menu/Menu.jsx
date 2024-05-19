@@ -21,7 +21,7 @@ const Menu = () => {
         ))}
       </div>
       <div className="flex items-center justify-center mt-6">
-        <button className="btn btn-outline border-0 border-b-4 mt-4">View Full Menu</button>
+        <button className="btn btn-outline border-0 border-b-4 mt-4 hover:border-none">View Full Menu</button>
       </div>
     </section>
   );
