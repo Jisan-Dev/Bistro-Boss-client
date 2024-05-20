@@ -4,12 +4,14 @@ const Header = () => {
   const navOptions = (
     <>
       <li>
-        <NavLink to="/" className={({ isActive }) => (isActive ? 'text-yellow-300' : '')}>
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
           HOME
         </NavLink>
       </li>
       <li>
-        <NavLink to="/contact">CONTACT US</NavLink>
+        <NavLink to="/menu" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
+          MENU
+        </NavLink>
       </li>
     </>
   );
@@ -32,7 +34,7 @@ const Header = () => {
             <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+            <ul className="menu-horizontal px-1">{navOptions}</ul>
           </div>
           <div className="navbar-end">
             <a className="btn">Get started</a>
