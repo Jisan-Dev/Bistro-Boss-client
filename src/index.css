@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.react-tabs__tab.react-tabs__tab--selected {
+  color: #ca8a04 !important;
+  border: none !important;
+}
+.react-tabs__tab.react-tabs__tab--selected::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #ca8a04;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 .thumbs-wrapper.axis-vertical {
   display: flex;
   justify-content: center;

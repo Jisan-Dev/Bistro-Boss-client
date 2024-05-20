@@ -16,7 +16,7 @@ const ItemSections = ({ items, heading, subHeading, title, subtitle, img }) => {
           ))}
         </div>
         <div className="flex items-center justify-center">
-          <Link to={`/order/${title ?? 'salad'}`}>
+          <Link to={`/order/${title ?? 'salads'}`}>
             <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
           </Link>
         </div>

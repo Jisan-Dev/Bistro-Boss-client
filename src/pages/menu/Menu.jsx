@@ -23,25 +23,25 @@ const Menu = () => {
       <ItemSection
         items={desserts}
         img={dessertImg}
-        title="DESSERTS"
+        title="desserts"
         subtitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
       <ItemSection
         items={pizza}
         img={pizzaImg}
-        title="PIZZA"
+        title="pizza"
         subtitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
       <ItemSection
         items={salad}
         img={saladImg}
-        title="SALADS"
+        title="salads"
         subtitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
       <ItemSection
         items={soup}
         img={soupImg}
-        title="SOUPS"
+        title="soups"
         subtitle="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
     </>

@@ -14,7 +14,7 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/order" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
+        <NavLink to="/order/salads" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
           ORDER
         </NavLink>
       </li>
