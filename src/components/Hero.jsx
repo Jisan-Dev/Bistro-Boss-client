@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Parallax } from 'react-parallax';
-import img from '../assets/menu/banner3.jpg';
 
-const Hero = ({ title, subtitle }) => {
+const Hero = ({ title, subtitle, img }) => {
   return (
     <Parallax blur={{ min: -15, max: 15 }} bgImage={img} bgImageAlt="the menu" strength={-200}>
       <div className="h-[750px] flex items-center justify-center">
