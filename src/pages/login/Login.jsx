@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 
 const Login = () => {
+  const [disabled, setDisabled] = useState(true);
+  const captchaRef = useRef(null);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,6 +29,15 @@ const Login = () => {
     //   });
     //   navigate(from, { replace: true });
     // });
+  };
+
+  const handleValidateCaptcha = () => {
+    const user_captcha_value = captchaRef.current.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   return (
@@ -50,15 +66,15 @@ const Login = () => {
                 </a>
               </label>
             </div>
-            {/* <div className="form-control">
-                                <label className="label">
-                                    <LoadCanvasTemplate />
-                                </label>
-                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above" className="input input-bordered" />
-
-                            </div> */}
+            <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input type="text" onBlur={handleValidateCaptcha} name="captcha" ref={captchaRef} placeholder="type the captcha above" className="input input-bordered" />
+              {/* <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above" className="input input-bordered" /> */}
+            </div>
             <div className="form-control mt-6">
-              <input className="btn btn-primary" type="submit" value="Login" />
+              <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
             </div>
           </form>
           <p className="flex items-center justify-center mb-5">
