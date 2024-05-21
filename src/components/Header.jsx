@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
   const navOptions = (
@@ -16,6 +16,11 @@ const Header = () => {
       <li>
         <NavLink to="/order/salads" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
           ORDER
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/login" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
+          LOGIN
         </NavLink>
       </li>
     </>
@@ -42,7 +47,9 @@ const Header = () => {
             <ul className="menu-horizontal px-1">{navOptions}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Get started</a>
+            <Link to="/register">
+              <a className="btn">Get started</a>
+            </Link>
           </div>
         </div>
       </header>
