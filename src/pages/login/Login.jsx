@@ -1,34 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    // signIn(email, password).then((result) => {
-    //   const user = result.user;
-    //   console.log(user);
-    //   Swal.fire({
-    //     title: 'User Login Successful.',
-    //     showClass: {
-    //       popup: 'animate__animated animate__fadeInDown',
-    //     },
-    //     hideClass: {
-    //       popup: 'animate__animated animate__fadeOutUp',
-    //     },
-    //   });
-    //   navigate(from, { replace: true });
-    // });
+    try {
+      const { user } = await signIn(email, password);
+      console.log('logged in ', user);
+      toast.success('Logged In successfully', {
+        style: {
+          border: '1px solid #ca8a04',
+          padding: '16px',
+          color: '#ca8a04',
+        },
+        iconTheme: {
+          primary: '#ca8a04',
+          secondary: '#FFFAEE',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.code || error.message, {
+        style: {
+          border: '1px solid #ca8a04',
+          padding: '16px',
+          color: '#ca8a04',
+        },
+        iconTheme: {
+          primary: '#ca8a04',
+          secondary: '#FFFAEE',
+        },
+      });
+    }
   };
 
   const handleValidateCaptcha = () => {

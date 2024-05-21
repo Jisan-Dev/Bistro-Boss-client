@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -14,9 +15,35 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const { user } = await createUser(data.email, data.password);
-    await updateUserProfile(data.name, data.photo);
-    console.log('user created : ', user);
+    try {
+      const { user } = await createUser(data.email, data.password);
+      await updateUserProfile(data.name, data.photo);
+      toast.success('Registered successfully', {
+        style: {
+          border: '1px solid #ca8a04',
+          padding: '16px',
+          color: '#ca8a04',
+        },
+        iconTheme: {
+          primary: '#ca8a04',
+          secondary: '#FFFAEE',
+        },
+      });
+      console.log('user created : ', user);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.code, {
+        style: {
+          border: '1px solid #ca8a04',
+          padding: '16px',
+          color: '#ca8a04',
+        },
+        iconTheme: {
+          primary: '#ca8a04',
+          secondary: '#FFFAEE',
+        },
+      });
+    }
   };
 
   // console.log(watch('name')); // watch input value by passing the name of it

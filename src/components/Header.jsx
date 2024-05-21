@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -31,6 +32,21 @@ const Header = () => {
     </>
   );
 
+  const handleLogOut = async () => {
+    await logOut();
+    toast.success('Logged Out successfully', {
+      style: {
+        border: '1px solid #ca8a04',
+        padding: '16px',
+        color: '#ca8a04',
+      },
+      iconTheme: {
+        primary: '#ca8a04',
+        secondary: '#FFFAEE',
+      },
+    });
+  };
+
   return (
     <>
       <header className=" fixed z-10 bg-opacity-30 bg-black text-white bg-blend-color-burn backdrop-blur-sm w-full">
@@ -53,7 +69,7 @@ const Header = () => {
           </div>
           <div className="navbar-end">
             {user ? (
-              <button onClick={logOut} className="btn">
+              <button onClick={handleLogOut} className="btn">
                 Logout
               </button>
             ) : (
