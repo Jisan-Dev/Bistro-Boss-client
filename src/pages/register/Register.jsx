@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Register = () => {
+  const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
@@ -30,6 +31,7 @@ const Register = () => {
         },
       });
       console.log('user created : ', user);
+      navigate('/');
     } catch (error) {
       console.log(error);
       toast.error(error.code, {

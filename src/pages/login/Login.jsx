@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
@@ -8,6 +8,10 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -32,6 +36,7 @@ const Login = () => {
           secondary: '#FFFAEE',
         },
       });
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error);
       toast.error(error.code || error.message, {
