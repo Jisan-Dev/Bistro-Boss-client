@@ -23,6 +23,12 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
+        <button className="btn bg-opacity-30 border-none text-white">
+          CART
+          <div className="badge badge-secondary">+0</div>
+        </button>
+      </li>
+      <li>
         {!user && (
           <NavLink to="/login" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
             LOGIN
@@ -65,7 +71,7 @@ const Header = () => {
             <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu-horizontal px-1">{navOptions}</ul>
+            <ul className="menu-horizontal px-1 items-center">{navOptions}</ul>
           </div>
           <div className="navbar-end">
             {user ? (
