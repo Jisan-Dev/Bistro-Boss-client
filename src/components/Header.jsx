@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import toast from 'react-hot-toast';
+import useCart from '../hooks/useCart';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const navOptions = (
     <>
       <li>
@@ -25,7 +27,7 @@ const Header = () => {
       <li>
         <button className="btn bg-opacity-30 border-none text-white">
           CART
-          <div className="badge badge-secondary">+0</div>
+          <div className="badge badge-secondary">+{cart.length}</div>
         </button>
       </li>
       <li>
