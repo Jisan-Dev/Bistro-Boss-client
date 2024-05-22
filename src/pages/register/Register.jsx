@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
@@ -18,23 +20,28 @@ const Register = () => {
     console.log(data);
     try {
       const { user } = await createUser(data.email, data.password);
+      console.log(user);
       await updateUserProfile(data.name, data.photo);
-      toast.success('Registered successfully', {
-        style: {
-          border: '1px solid #ca8a04',
-          padding: '16px',
-          color: '#ca8a04',
-        },
-        iconTheme: {
-          primary: '#ca8a04',
-          secondary: '#FFFAEE',
-        },
-      });
-      console.log('user created : ', user);
-      navigate('/');
+      const userInfo = { name: data.name, email: data.email };
+      const { data: res } = await axiosPublic.post('/users', userInfo);
+      console.log(res);
+      if (res.insertedId) {
+        toast.success('Registered successfully', {
+          style: {
+            border: '1px solid #ca8a04',
+            padding: '16px',
+            color: '#ca8a04',
+          },
+          iconTheme: {
+            primary: '#ca8a04',
+            secondary: '#FFFAEE',
+          },
+        });
+        navigate('/');
+      }
     } catch (error) {
       console.log(error);
-      toast.error(error.code, {
+      toast.error(error.code || error.message, {
         style: {
           border: '1px solid #ca8a04',
           padding: '16px',
