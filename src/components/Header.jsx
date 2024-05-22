@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import useCart from '../hooks/useCart';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -25,10 +26,12 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <button className="btn bg-opacity-30 border-none text-white">
-          CART
-          <div className="badge badge-secondary">+{cart.length}</div>
-        </button>
+        <NavLink to="/dashboard/cart">
+          <button className="btn bg-opacity-30 border-none text-white">
+            <FaShoppingCart className="text-xl" />
+            <div className="badge badge-secondary">+{cart.length}</div>
+          </button>
+        </NavLink>
       </li>
       <li>
         {!user && (
