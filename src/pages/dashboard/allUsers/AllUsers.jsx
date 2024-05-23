@@ -96,11 +96,14 @@ const AllUsers = () => {
                 <td>{user.email}</td>
                 <td>
                   {user.role === 'Admin' ? (
-                    <div title="Admin" className="bg-orange-400 px-2 py-2 inline-block text-white text-xl rounded-md">
+                    <div className="tooltip bg-orange-400 px-2 py-2 inline-block text-white text-xl rounded-md cursor-pointer" data-tip="Admin">
                       <MdAdminPanelSettings />
                     </div>
                   ) : (
-                    <div onClick={() => handleMakeAdmin(user)} title="User" className="bg-orange-400 px-2 py-2 inline-block text-white text-xl rounded-md">
+                    <div
+                      data-tip="User"
+                      onClick={() => handleMakeAdmin(user)}
+                      className="tooltip bg-orange-400 px-2 py-2 inline-block text-white text-xl rounded-md cursor-pointer">
                       <FaUsers />
                     </div>
                   )}
