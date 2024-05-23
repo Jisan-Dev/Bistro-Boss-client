@@ -9,13 +9,14 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
+
   // Add a request interceptor
   // request interceptor to add authorization header for every secure call to the api
   axiosSecure.interceptors.request.use(
     function (config) {
       // Do something before request is sent
       const token = localStorage.getItem('access-token');
-      console.log('request stopped by interceptor before sent', token);
+      // console.log('request stopped by interceptor before sent', token);
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -36,7 +37,7 @@ const useAxiosSecure = () => {
       // Do something with response error
       // we'll handle 401 & 403 status
       const status = error.response.status;
-      console.log('errorStatus check in the response interceptor', status);
+      // console.log('errorStatus check in the response interceptor', status);
       if (status === 401 || status === 403) {
         await logOut();
         navigate('/login', { replace: true });

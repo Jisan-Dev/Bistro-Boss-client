@@ -5,12 +5,13 @@ import { MdOutlineRestaurantMenu } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 import { BsFillMenuButtonFill } from 'react-icons/bs';
+import useIsAdmin from '../hooks/useIsAdmin';
 
 const Dashboard = () => {
   const [cart] = useCart();
 
-  // TODO: get isAdmin value from the database
-  const isAdmin = true;
+  // get isAdmin bool value from the database
+  const [isAdmin] = useIsAdmin();
 
   return (
     <div className="flex">
