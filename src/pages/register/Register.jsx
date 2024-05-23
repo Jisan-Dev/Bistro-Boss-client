@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin';
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -111,6 +112,7 @@ const Register = () => {
               <input className="btn btn-primary" type="submit" value="Sign Up" />
             </div>
           </form>
+          <SocialLogin />
           <p className="flex items-center justify-center mb-5">
             <small>
               Already have an account{' '}

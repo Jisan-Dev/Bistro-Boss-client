@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
+import SocialLogin from '../../components/SocialLogin';
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -11,7 +12,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
-  console.log('state in location of login page =>', from);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -100,6 +100,7 @@ const Login = () => {
               <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
             </div>
           </form>
+          <SocialLogin />
           <p className="flex items-center justify-center mb-5">
             <small>
               New Here?{' '}
