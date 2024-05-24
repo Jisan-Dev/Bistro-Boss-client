@@ -13,6 +13,7 @@ import AllUsers from '../pages/dashboard/allUsers/AllUsers';
 import AddItem from '../pages/dashboard/addItem/AddItem';
 import ManageItems from '../pages/dashboard/manageItems/MangeItems';
 import AdminRoute from './AdminRoute';
+import UpdateItem from '../pages/dashboard/updateItem/UpdateItem';
 
 const router = createBrowserRouter([
   {
@@ -57,13 +58,13 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // general user routes
+      //note: general user routes
       {
         path: '/dashboard/cart',
         element: <Cart />,
       },
 
-      // admin only routes
+      //note: admin only routes
       {
         path: 'allUsers',
         element: (
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: '/dashboard/updateItem/:id',
+        element: (
+          <AdminRoute>
+            <UpdateItem />
           </AdminRoute>
         ),
       },

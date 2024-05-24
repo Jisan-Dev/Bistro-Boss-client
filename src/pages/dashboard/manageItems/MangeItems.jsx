@@ -5,6 +5,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { BiSolidEdit } from 'react-icons/bi';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const MangeItems = () => {
   const [menu, , refetch] = useMenu();
@@ -63,9 +64,11 @@ const MangeItems = () => {
                 <td>{item.name}</td>
                 <td>$ {item.price}</td>
                 <td>
-                  <button onClick={() => handleDelete(item._id)} className="btn bg-orange-400 text-white hover:bg-orange-500 btn-md text-lg">
-                    <BiSolidEdit />
-                  </button>
+                  <Link to={`/dashboard/updateItem/${item._id}`}>
+                    <button className="btn bg-orange-400 text-white hover:bg-orange-500 btn-md text-lg">
+                      <BiSolidEdit />
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button onClick={() => handleDelete(item)} className="btn bg-red-600 text-white hover:bg-red-700 btn-md">
