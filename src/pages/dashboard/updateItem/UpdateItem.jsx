@@ -35,9 +35,9 @@ const UpdateItem = () => {
       if (res.data.success) {
         // now send the item data to the server with image display_url
         const itemData = {
-          name: data.name,
-          category: data.category,
-          price: parseFloat(data.price),
+          name: data.name || menuItem.name,
+          category: data.category || menuItem.category,
+          price: parseFloat(data.price) || menuItem.price,
           recipe: data.recipe || menuItem.recipe,
           image: res.data.data.display_url,
         };
@@ -52,9 +52,9 @@ const UpdateItem = () => {
       }
     } else {
       const itemData = {
-        name: data.name,
-        category: data.category,
-        price: parseFloat(data.price),
+        name: data.name || menuItem.name,
+        category: data.category || menuItem.category,
+        price: parseFloat(data.price) || menuItem.price,
         recipe: data.recipe || menuItem.recipe,
         image: menuItem.image,
       };
