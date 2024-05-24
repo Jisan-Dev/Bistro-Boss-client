@@ -19,7 +19,6 @@ const UpdateItem = () => {
 
   useEffect(() => {
     axiosPublic.get(`/menu/${id}`).then((res) => {
-      console.log(res);
       setMenuItem(res.data);
     });
   }, [id, axiosPublic]);
@@ -33,7 +32,6 @@ const UpdateItem = () => {
           'content-Type': 'multipart/form-data',
         },
       });
-      console.log(res.data);
       if (res.data.success) {
         // now send the item data to the server with image display_url
         const itemData = {
@@ -44,9 +42,8 @@ const UpdateItem = () => {
           image: res.data.data.display_url,
         };
         const menuRes = await axiosSecure.patch(`/menu/${menuItem._id}`, itemData);
-        console.log(menuRes.data);
         if (menuRes.data.modifiedCount > 0) {
-          reset();
+          // reset();
           Swal.fire({
             title: `<strong>${data.name}</strong> <br/> successfully updated to the menu`,
             icon: 'success',
@@ -54,7 +51,6 @@ const UpdateItem = () => {
         }
       }
     } else {
-      console.log('in else ', data);
       const itemData = {
         name: data.name,
         category: data.category,
@@ -63,9 +59,8 @@ const UpdateItem = () => {
         image: menuItem.image,
       };
       const menuRes = await axiosSecure.patch(`/menu/${menuItem._id}`, itemData);
-      console.log(menuRes.data);
       if (menuRes.data.modifiedCount > 0) {
-        reset();
+        // reset();
         Swal.fire({
           title: `<strong>${data.name}</strong> <br/> successfully updated to the menu`,
           icon: 'success',
