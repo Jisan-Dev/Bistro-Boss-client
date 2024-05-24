@@ -46,7 +46,7 @@ const UpdateItem = () => {
         const menuRes = await axiosSecure.patch(`/menu/${menuItem._id}`, itemData);
         console.log(menuRes.data);
         if (menuRes.data.modifiedCount > 0) {
-          // reset();
+          reset();
           Swal.fire({
             title: `<strong>${data.name}</strong> <br/> successfully updated to the menu`,
             icon: 'success',
@@ -65,7 +65,7 @@ const UpdateItem = () => {
       const menuRes = await axiosSecure.patch(`/menu/${menuItem._id}`, itemData);
       console.log(menuRes.data);
       if (menuRes.data.modifiedCount > 0) {
-        // reset();
+        reset();
         Swal.fire({
           title: `<strong>${data.name}</strong> <br/> successfully updated to the menu`,
           icon: 'success',
