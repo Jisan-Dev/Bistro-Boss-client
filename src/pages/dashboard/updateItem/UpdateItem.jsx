@@ -14,7 +14,12 @@ const UpdateItem = () => {
   const { id } = useParams();
   const [menuItem, setMenuItem] = useState({});
   const axiosPublic = useAxiosPublic();
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -103,7 +108,8 @@ const UpdateItem = () => {
               <label className="label">
                 <span className="label-text">Price*</span>
               </label>
-              <input defaultValue={menuItem?.price} type="number" placeholder="Price" {...register('price')} className="input input-bordered w-full" />
+              <input defaultValue={menuItem?.price} type="text" placeholder="Price" {...register('price', { pattern: /^\d+$/ })} className="input input-bordered w-full" />
+              {errors.price && <span className="text-red-600">Not a number</span>}
             </div>
           </div>
           {/* recipe details */}
