@@ -2,6 +2,7 @@ import React from 'react';
 import useCart from '../../../hooks/useCart';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const axiosSecure = useAxiosSecure();
@@ -51,7 +52,11 @@ const Cart = () => {
         <h2 className="text-3xl">
           Total Price: <strong>${totalPrice}</strong>
         </h2>
-        <button className="btn bg-orange-600 hover:bg-orange-500 text-white">Pay Now</button>
+        <Link to={cart.length ? '/dashboard/payment' : '#'}>
+          <button disabled={!cart.length} className="btn bg-orange-600 hover:bg-orange-500 text-white">
+            Pay Now
+          </button>
+        </Link>
       </div>
       <div className="overflow-x-auto">
         <table className="table mt-4">
