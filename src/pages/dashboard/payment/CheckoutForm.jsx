@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useCart from '../../../hooks/useCart';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = () => {
   const { user } = useAuth();
@@ -12,17 +13,19 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
 
   const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0);
   console.log(totalPrice);
 
   useEffect(() => {
-    axiosSecure.post('/create-payment-intent', { price: totalPrice }).then((res) => {
-      console.log('eta');
-      console.log(res.data);
-      setClientSecret(res.data.clientSecret);
-    });
+    if (totalPrice > 0) {
+      axiosSecure.post('/create-payment-intent', { price: totalPrice }).then((res) => {
+        console.log('eta');
+        console.log(res.data);
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
@@ -72,8 +75,29 @@ const CheckoutForm = () => {
       console.log('confirmError ', confirmError);
     } else {
       console.log('paymentIntent ', paymentIntent.id);
-      console.log('transaction id', paymentIntent.id);
       setTransactionId(paymentIntent.id);
+
+      // now save the payment in the db
+      const payment = {
+        email: user?.email,
+        price: totalPrice,
+        transactionId: paymentIntent.id,
+        date: new Date(), //utc date convert, moment.js
+        cartIds: cart.map((item) => item._id),
+        foodIds: cart.map((item) => item.foodId),
+        status: 'pending',
+      };
+
+      const res = await axiosSecure.post('/payment', payment);
+      console.log('payment saved ', res);
+      if (res.data?.paymentResult?.insertedId) {
+        Swal.fire({
+          title: `CONGRATS!`,
+          text: `Your payment has been successful!`,
+          icon: 'success',
+        });
+      }
+      refetch();
     }
   };
   return (
