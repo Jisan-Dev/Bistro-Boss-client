@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react';
 import SectionHeader from '../../../../components/SectionHeader';
 import MenuItem from '../../../../components/MenuItem';
+import { useQuery } from '@tanstack/react-query';
+import useMenu from '../../../../hooks/useMenu';
 
 const Menu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch('menu.json')
-      .then((res) => res.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === 'popular');
-        setMenu(popularItems);
-      });
-  }, []);
+  const [menu] = useMenu();
+  const popularItems = menu.filter((item) => item.category === 'popular');
+
   return (
     <section className="mb-12 container mx-auto max-w-[1160px]">
       <SectionHeader heading="From Our Menu" subHeading="Popular Items"></SectionHeader>
       <div className="grid md:grid-cols-2 gap-10">
-        {menu.map((item) => (
+        {popularItems.map((item) => (
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
