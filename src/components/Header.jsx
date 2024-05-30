@@ -4,9 +4,11 @@ import { AuthContext } from '../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import useCart from '../hooks/useCart';
 import { FaShoppingCart } from 'react-icons/fa';
+import useIsAdmin from '../hooks/useIsAdmin';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useIsAdmin();
   const [cart] = useCart();
   const navOptions = (
     <>
@@ -33,6 +35,20 @@ const Header = () => {
           </button>
         </NavLink>
       </li>
+      {user && isAdmin && (
+        <li>
+          <NavLink to="/dashboard/adminHome" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
+            Dashboard
+          </NavLink>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <NavLink to="/dashboard/userHome" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>
+            Dashboard
+          </NavLink>
+        </li>
+      )}
       <li>
         {!user && (
           <NavLink to="/login" className={({ isActive }) => (isActive ? 'text-yellow-300 px-6' : 'px-6')}>

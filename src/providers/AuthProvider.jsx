@@ -58,6 +58,7 @@ const AuthProvider = ({ children }) => {
         axiosPublic.post('/jwt', userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem('access-token', res.data.token);
+            setLoading(false);
           }
         });
         console.log('currentUser==> ', currentUser);
@@ -65,8 +66,8 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('access-token');
         console.log('currentUser==> ', currentUser);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
